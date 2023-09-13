@@ -20,6 +20,7 @@ variable "subdomain_name" {
 
 variable "route53_zone_id" {
   description = "Route53 hosted zone ID for the domain."
+  default     = "Z012116528BBKQBWO9WHV"
   type        = string
 }
 
