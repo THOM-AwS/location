@@ -17,7 +17,7 @@ resource "aws_s3_bucket_policy" "web_content_policy" {
       {
         Effect = "Allow",
         Principal = {
-          AWS = "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${aws_cloudfront_origin_access_identity.web_oai.iam_arn}"
+          AWS = "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"
         },
         Action   = "s3:GetObject",
         Resource = "arn:aws:s3:::${aws_s3_bucket.web_content.bucket}/*"

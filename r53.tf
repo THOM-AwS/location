@@ -14,7 +14,6 @@ resource "aws_route53_record" "subdomain" {
   zone_id = data.aws_route53_zone.apse2_domain.zone_id
   name    = "${var.subdomain_name}.${var.domain_name}"
   type    = "A"
-  ttl     = "300"
 
   alias {
     name                   = "location.apse2.com.au" # Replace with your actual endpoint URL.

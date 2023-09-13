@@ -16,7 +16,7 @@ resource "aws_api_gateway_authorizer" "cognito_authorizer" {
   name          = "cognito_authorizer_for_ddb_query"
   type          = "COGNITO_USER_POOLS"
   rest_api_id   = aws_api_gateway_rest_api.ddb_query_api.id
-  provider_arns = [aws_cognito_user_pool.main.arn]
+  provider_arns = [aws_cognito_user_pool.location_user_pool.arn]
 }
 
 // === API Gateway Method (HTTP POST) ===
