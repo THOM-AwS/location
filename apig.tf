@@ -46,8 +46,3 @@ resource "aws_lambda_permission" "api_gateway_permission" {
   function_name = aws_lambda_function.ddb_query.function_name
   principal     = "apigateway.amazonaws.com"
 }
-
-// === API Gateway URL for Invocation ===
-output "api_gateway_url" {
-  value = "https://${aws_api_gateway_rest_api.ddb_query_api.id}.execute-api.${var.region}.amazonaws.com/default"
-}
