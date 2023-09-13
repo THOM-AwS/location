@@ -17,8 +17,8 @@ resource "aws_route53_record" "subdomain" {
   ttl     = "300"
 
   alias {
-    name                   = "YOUR_CLOUDFRONT_OR_ELBS_URL"     # Replace with your actual endpoint URL.
-    zone_id                = "YOUR_CLOUDFRONT_OR_ELBS_ZONE_ID" # Replace with the corresponding Zone ID.
+    name                   = "location.apse2.com.au" # Replace with your actual endpoint URL.
+    zone_id                = "Z012116528BBKQBWO9WHV" # Replace with the corresponding Zone ID.
     evaluate_target_health = false
   }
 }
