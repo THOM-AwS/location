@@ -1,5 +1,6 @@
 
 plan: 
+	terraform init
 	terraform plan
 
 apply: 
