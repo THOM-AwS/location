@@ -46,7 +46,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Apply
-      run: make applyAuto
+      run: make apply
 
   deploy-s3:
     runs-on: ubuntu-latest
