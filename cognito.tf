@@ -42,7 +42,10 @@ resource "aws_cognito_user_pool_client" "location_user_pool_client" {
   allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
 
   // URLs
-  callback_urls        = ["https://location.apse2.com.au/callback"]
+  callback_urls = [
+    "https://location.apse2.com.au/callback",
+    "https://location.apse2.com.au/home"
+  ]
   logout_urls          = ["https://location.apse2.com.au/logout"]
   default_redirect_uri = "https://location.apse2.com.au/home"
 

@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "web_content" {
-  bucket = "web-content-${var.subdomain_name}-${var.domain_name}"
+  bucket = "${var.subdomain_name}-${var.domain_name}"
   acl    = "private"
 
   website {
