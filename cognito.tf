@@ -25,7 +25,7 @@ resource "aws_cognito_user_pool" "location_user_pool" {
     reply_to_email_address = aws_ses_email_identity.noreply.email
     source_arn             = aws_ses_email_identity.noreply.arn
     email_sending_account  = "DEVELOPER"
-    role_arn               = aws_iam_role.cognito_ses_role.arn # <-- This is the IAM Role ARN for SES permissions
+    # role_arn               = aws_iam_role.cognito_ses_role.arn # <-- This is the IAM Role ARN for SES permissions
   }
 
   # Other configurations...
