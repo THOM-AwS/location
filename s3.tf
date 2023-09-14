@@ -1,10 +1,15 @@
 resource "aws_s3_bucket" "web_content" {
   bucket = "${var.subdomain_name}.${var.domain_name}"
   acl    = "private"
+}
 
-  website {
-    index_document = "index.html"
-    error_document = "error.html"
+resource "aws_s3_bucket_website_configuration" "web" {
+  bucket = aws_s3_bucket.web_content.id
+  index_document {
+    suffix = "index.html"
+  }
+  error_document {
+    key = "error.html"
   }
 }
 

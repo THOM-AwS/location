@@ -16,8 +16,8 @@ resource "aws_route53_record" "subdomain" {
   type    = "A"
 
   alias {
-    name                   = aws_s3_bucket.web_content.website_endpoint # Replace with your actual endpoint URL.
-    zone_id                = "Z3AQBSTGFYJSTF"                           # Replace with the corresponding Zone ID.
+    name                   = aws_s3_bucket_website_configuration.web.website_endpoint
+    zone_id                = "Z3AQBSTGFYJSTF"
     evaluate_target_health = false
   }
 }
