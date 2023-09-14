@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@main
+      uses: actions/checkout@master
     - name: Lint Terraform
       uses: actionshub/terraform-lint@main
       
@@ -23,7 +23,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       region: us-east-1
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
     - name: Install required packages
       run: |
         sudo apt-get update
@@ -44,7 +44,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       region: us-east-1
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
     - name: Apply
       run: make apply
 
