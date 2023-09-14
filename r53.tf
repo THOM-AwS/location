@@ -15,9 +15,9 @@ resource "aws_route53_record" "subdomain" {
   name    = "${var.subdomain_name}.${var.domain_name}"
   type    = "A"
 
-  alias {
-    name                   = "location.apse2.com.au" # Replace with your actual endpoint URL.
-    zone_id                = "Z012116528BBKQBWO9WHV" # Replace with the corresponding Zone ID.
-    evaluate_target_health = false
-  }
+  # alias {
+  #   name                   = "location.apse2.com.au" # Replace with your actual endpoint URL.
+  #   zone_id                = "Z012116528BBKQBWO9WHV" # Replace with the corresponding Zone ID.
+  #   evaluate_target_health = false
+  # }
 }
