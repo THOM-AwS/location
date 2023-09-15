@@ -30,7 +30,15 @@ resource "aws_s3_bucket_policy" "web_content_policy" {
   })
 }
 
-resource "aws_s3_bucket_acl" "acl" {
+resource "aws_s3_bucket_ownership_controls" "acl" {
   bucket = aws_s3_bucket.web_content.id
-  acl    = "public-read"
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_acl" "acl" {
+  depends_on = [aws_s3_bucket_ownership_controls.acl]
+  bucket     = aws_s3_bucket.web_content.id
+  acl        = "public-read"
 }

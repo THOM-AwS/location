@@ -54,11 +54,6 @@ jobs:
     steps:
     - name: checkout branch
       uses: actions/checkout@master
-    - name: List directory contents
-      run: |
-        ls -al
-        ls -al app
-        ls -al app/location/
     - name: deploy
       uses: jakejarvis/s3-sync-action@master
       with:
