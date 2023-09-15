@@ -32,5 +32,5 @@ resource "aws_s3_bucket_policy" "web_content_policy" {
 
 resource "aws_s3_bucket_acl" "acl" {
   bucket = aws_s3_bucket.web_content.id
-  acl    = "public"
+  acl    = "public-read"
 }
