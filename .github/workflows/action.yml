@@ -52,10 +52,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
     steps:
-    - name: List directory contents
-      run: ls -al
     - name: checkout branch
       uses: actions/checkout@master
+    - name: List directory contents
+      run: ls -al
     - name: deploy
       uses: jakejarvis/s3-sync-action@master
       with:
