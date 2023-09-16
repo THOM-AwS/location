@@ -39,12 +39,6 @@ resource "aws_route53_record" "cert_validation" {
   ttl     = 60
 }
 
-# Certificate validation
-resource "aws_acm_certificate_validation" "cert_base" {
-  certificate_arn         = aws_acm_certificate.cert.arn
-  validation_record_fqdns = [for r in aws_route53_record.cert_validation : r.fqdn]
-}
-
 resource "aws_route53_record" "cert_base" {
   for_each = {
     for dvo in aws_acm_certificate.cert_base.domain_validation_options : dvo.domain_name => {
@@ -65,4 +59,8 @@ resource "aws_route53_record" "cert_base" {
 resource "aws_acm_certificate_validation" "cert_base" {
   certificate_arn         = aws_acm_certificate.cert_base.arn
   validation_record_fqdns = [for r in aws_route53_record.cert_base : r.fqdn]
+}
+resource "aws_acm_certificate_validation" "cert" {
+  certificate_arn         = aws_acm_certificate.cert.arn
+  validation_record_fqdns = [for r in aws_route53_record.cert_validation : r.fqdn]
 }
