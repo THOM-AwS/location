@@ -30,7 +30,7 @@ resource "aws_route53_record" "cloudfront" {
   name    = "${var.subdomain_name}.${var.domain_name}"
   type    = "A"
   alias {
-    name                   = aws_cloudfront_distribution.s3_distribution
+    name                   = aws_cloudfront_distribution.s3_distribution.domain_name
     zone_id                = "Z2FDTNDATAQYW2"
     evaluate_target_health = false
   }
