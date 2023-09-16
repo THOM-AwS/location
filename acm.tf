@@ -8,7 +8,7 @@ resource "aws_acm_certificate" "cert" {
 }
 
 resource "aws_acm_certificate" "cert_base" {
-  domain_name       = var.domain_name
+  domain_name       = "*.${var.domain_name}"
   validation_method = "DNS"
   lifecycle {
     create_before_destroy = true
