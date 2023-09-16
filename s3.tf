@@ -19,6 +19,14 @@ resource "aws_s3_bucket_policy" "web_content_policy" {
     Version = "2012-10-17",
     Statement = [
       {
+        "Effect" : "Allow",
+        "Principal" : {
+          "AWS" : "arn:aws:iam::941133421128:user/actions"
+        },
+        "Action" : "s3:PutObject",
+        "Resource" : "arn:aws:s3:::location.apse2.com.au/*"
+      },
+      {
         Effect = "Allow",
         Principal = {
           AWS = "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"
