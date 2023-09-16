@@ -16,6 +16,9 @@ jobs:
       uses: actionshub/terraform-lint@main
     - name: ESLint
       uses: Krizzu/eslint-check-action@v1.1.0
+      with:
+        eslintFiles: "lib, scripts"
+        eslintExt: "ts, tsx, html"
       
   plan:
     runs-on: ubuntu-latest
