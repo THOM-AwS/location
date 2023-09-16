@@ -26,8 +26,6 @@ resource "aws_cognito_user_pool" "location_user_pool" {
   #   source_arn             = aws_ses_email_identity.noreply.arn
   #   email_sending_account  = "DEVELOPER"
   # }
-
-  # Other configurations...
 }
 
 // === Cognito User Pool Client Configuration ===
@@ -53,12 +51,10 @@ resource "aws_cognito_user_pool_client" "location_user_pool_client" {
 
   // Secrets
   generate_secret = false
-
-  # Additional client configurations...
 }
 
 resource "aws_cognito_user_pool_domain" "domain" {
-  domain          = var.domain_name
+  domain          = "${var.subdomain_name}.${var.domain_name}"
   user_pool_id    = aws_cognito_user_pool.location_user_pool.id
   certificate_arn = aws_acm_certificate.subdomain.arn
 }
