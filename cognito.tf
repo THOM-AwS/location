@@ -53,8 +53,8 @@ resource "aws_cognito_user_pool_client" "location_user_pool_client" {
   generate_secret = false
 }
 
-resource "aws_cognito_user_pool_domain" "domain" {
-  domain          = "${var.subdomain_name}.${var.domain_name}"
-  user_pool_id    = aws_cognito_user_pool.location_user_pool.id
-  certificate_arn = aws_acm_certificate.subdomain.arn
-}
+# resource "aws_cognito_user_pool_domain" "domain" {
+#   domain          = "${var.subdomain_name}.${var.domain_name}"
+#   user_pool_id    = aws_cognito_user_pool.location_user_pool.id
+#   certificate_arn = aws_acm_certificate.subdomain.arn
+# }
