@@ -36,10 +36,14 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       restriction_type = "none"
     }
   }
-
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn      = aws_acm_certificate_validation.cert_validation.certificate_arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.1_2016"
   }
+
+  # Add your custom domain as an alternate domain name
+  aliases = ["${var.subdomain_name}.${var.domain_name}"]
 
   price_class = "PriceClass_100"
 }
