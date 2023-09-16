@@ -2,7 +2,7 @@
 resource "aws_cognito_user_pool" "location_user_pool" {
   name         = "location_apse2_user_pool"
   domain       = var.domain_name
-  user_pool_id = aws_cognito_user_pool.location_user_pool.id
+  user_pool_id = aws_cognito_user_pool_client.location_user_pool_client.id
   // Verification and Aliases
   auto_verified_attributes = ["email"]
   alias_attributes         = ["email"]
