@@ -57,3 +57,4 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
   comment = "Origin access identity for ${var.subdomain_name}.${var.domain_name} content"
 }
+
