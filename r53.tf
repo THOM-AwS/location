@@ -4,17 +4,29 @@ data "aws_route53_zone" "apse2_domain" {
 }
 
 # Create an A record alias pointing to the CloudFront distribution
+# resource "aws_route53_record" "root_domain_a_record" {
+#   zone_id = data.aws_route53_zone.apse2_domain.zone_id
+#   name    = var.domain_name
+#   type    = "A"
+#   records = ["8.8.8.8"]
+#   # alias {
+#   #   name                   = aws_cloudfront_distribution.s3_distribution.domain_name
+#   #   zone_id                = aws_cloudfront_distribution.s3_distribution.hosted_zone_id
+#   #   evaluate_target_health = false
+#   # }
+# }
 resource "aws_route53_record" "root_domain_a_record" {
   zone_id = data.aws_route53_zone.apse2_domain.zone_id
-  name    = var.domain_name
+  name    = var.domain_name # this should be set to apse2.com.au
   type    = "A"
-  records = ["8.8.8.8"]
-  # alias {
-  #   name                   = aws_cloudfront_distribution.s3_distribution.domain_name
-  #   zone_id                = aws_cloudfront_distribution.s3_distribution.hosted_zone_id
-  #   evaluate_target_health = false
-  # }
+
+  alias {
+    name                   = aws_cloudfront_distribution.s3_distribution.domain_name
+    zone_id                = aws_cloudfront_distribution.s3_distribution.hosted_zone_id
+    evaluate_target_health = false
+  }
 }
+
 
 # SES Domain Verification Record
 resource "aws_route53_record" "apse2_domain_verification" {
