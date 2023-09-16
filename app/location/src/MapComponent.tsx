@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuth } from './AuthContext';
 
 function MapComponent() {
-    const { currentUser, signIn, signOut } = useAuth();
+    const { currentUser} = useAuth(); // currentUser , signIn, signOut 
 
     return (
         <div>

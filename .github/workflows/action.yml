@@ -1,8 +1,6 @@
 name: Makefile CI
  
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -19,14 +17,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
     steps:
+    - name: Check out code
+      uses: actions/checkout@master
     - name: Install dependencies
-      run: npm install
+      run: |
+        cd app/location
+        npm install
     - name: Build React app
       run: |
-        cd app/location/
+        cd app/location
         npm run build
     - name: artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@master
       with:
         name: build-artifact
         path: app/location/build/
@@ -52,9 +54,13 @@ jobs:
     - name: plan
       run: make plan
 
+
+  pull_request:
+    types: [ closed ]
+
+jobs:
   apply:
     runs-on: ubuntu-latest
-    needs: plan
     env:
       AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}} 
       AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
@@ -63,15 +69,13 @@ jobs:
     - uses: actions/checkout@master
     - name: Apply
       run: make apply
-
   deploy-s3:
     runs-on: ubuntu-latest
-    needs: build
     steps:
     - name: checkout branch
       uses: actions/checkout@master
     - name: Download build artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@master
       with:
         name: build-artifact
         path: app/location/build/    
