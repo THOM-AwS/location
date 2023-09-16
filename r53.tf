@@ -16,8 +16,8 @@ resource "aws_route53_record" "subdomain" {
   type    = "A"
 
   alias {
-    name                   = aws_s3_bucket_website_configuration.web.website_endpoint
-    zone_id                = "Z3AQBSTGFYJSTF"
+    name                   = aws_cloudfront_distribution.s3_distribution.domain_name
+    zone_id                = "Z2FDTNDATAQYW2" # This is the default hosted zone ID for CloudFront
     evaluate_target_health = false
   }
 }
