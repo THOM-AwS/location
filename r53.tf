@@ -38,6 +38,10 @@ resource "aws_route53_record" "cert_validation" {
   records = [each.value.value]
   ttl     = 60
 }
+resource "aws_acm_certificate_validation" "cert" {
+  certificate_arn         = aws_acm_certificate.cert.arn
+  validation_record_fqdns = [for r in aws_route53_record.cert_validation : r.fqdn]
+}
 
 resource "aws_route53_record" "cert_base" {
   for_each = {
@@ -54,13 +58,8 @@ resource "aws_route53_record" "cert_base" {
   records = [each.value.value]
   ttl     = 60
 }
-
-# Certificate validation
 resource "aws_acm_certificate_validation" "cert_base" {
   certificate_arn         = aws_acm_certificate.cert_base.arn
   validation_record_fqdns = [for r in aws_route53_record.cert_base : r.fqdn]
 }
-resource "aws_acm_certificate_validation" "cert" {
-  certificate_arn         = aws_acm_certificate.cert.arn
-  validation_record_fqdns = [for r in aws_route53_record.cert_validation : r.fqdn]
-}
+
