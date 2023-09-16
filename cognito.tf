@@ -1,8 +1,6 @@
 // === Cognito User Pool Configuration ===
 resource "aws_cognito_user_pool" "location_user_pool" {
-  name         = "location_apse2_user_pool"
-  domain       = var.domain_name
-  user_pool_id = aws_cognito_user_pool_client.location_user_pool_client.id
+  name = "location_apse2_user_pool"
   // Verification and Aliases
   auto_verified_attributes = ["email"]
   alias_attributes         = ["email"]
@@ -57,4 +55,10 @@ resource "aws_cognito_user_pool_client" "location_user_pool_client" {
   generate_secret = false
 
   # Additional client configurations...
+}
+
+resource "aws_cognito_user_pool_domain" "example" {
+  domain          = var.domain_name
+  user_pool_id    = aws_cognito_user_pool.location_user_pool.id
+  certificate_arn = aws_acm_certificate.cert.arn
 }
