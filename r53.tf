@@ -16,8 +16,8 @@ resource "aws_route53_record" "subdomain" {
   type    = "A"
 
   alias {
-    name                   = aws_cloudfront_distribution.s3_distribution.domain_name
-    zone_id                = "Z2FDTNDATAQYW2" # This is the default hosted zone ID for CloudFront
+    name                   = aws_cognito_user_pool_domain.location_user_pool.cloudfront_distribution
+    zone_id                = aws_cognito_user_pool_domain.location_user_pool.cloudfront_distribution_zone_id
     evaluate_target_health = false
   }
 }
