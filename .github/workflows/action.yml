@@ -22,7 +22,9 @@ jobs:
     - name: Install dependencies
       run: npm install
     - name: Build React app
-      run: npm run build
+      run: |
+        cd app/location/
+        npm run build
     - name: artifacts
       uses: actions/upload-artifact@v2
       with:
