@@ -23,7 +23,7 @@ resource "aws_route53_record" "subdomain" {
 }
 
 resource "aws_route53_record" "cert_validation" {
-  zone_id = "YOUR_ROUTE53_HOSTED_ZONE_ID"
+  zone_id = var.route53_zone_id
   name    = aws_acm_certificate.cert.domain_validation_options[0].resource_record_name
   type    = aws_acm_certificate.cert.domain_validation_options[0].resource_record_type
   records = [aws_acm_certificate.cert.domain_validation_options[0].resource_record_value]
