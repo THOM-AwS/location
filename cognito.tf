@@ -57,8 +57,8 @@ resource "aws_cognito_user_pool_client" "location_user_pool_client" {
   # Additional client configurations...
 }
 
-resource "aws_cognito_user_pool_domain" "example" {
+resource "aws_cognito_user_pool_domain" "domain" {
   domain          = var.domain_name
   user_pool_id    = aws_cognito_user_pool.location_user_pool.id
-  certificate_arn = aws_acm_certificate.cert.arn
+  certificate_arn = aws_acm_certificate.cert-base.arn
 }

@@ -23,7 +23,9 @@ jobs:
       run: npm install
     - name: Build React app
       run: |
-        cd app/location/
+        cd app/location
+        pwd
+        ls
         npm run build
     - name: artifacts
       uses: actions/upload-artifact@v2
