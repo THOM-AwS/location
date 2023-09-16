@@ -46,7 +46,10 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   # Add your custom domain as an alternate domain name
-  aliases = ["${var.subdomain_name}.${var.domain_name}"]
+  aliases = [
+    "${var.subdomain_name}.${var.domain_name}",
+    var.domain_name
+  ]
 
   price_class = "PriceClass_100"
 }
