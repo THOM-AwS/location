@@ -38,17 +38,17 @@ resource "aws_route53_record" "apse2_domain_verification" {
 }
 
 # Alias Record for Cognito User Pool Domain's Cloudfront Distribution
-resource "aws_route53_record" "cognito" {
-  zone_id = data.aws_route53_zone.apse2_domain.zone_id
-  name    = "${var.subdomain_name}.${var.domain_name}"
-  type    = "A"
+# resource "aws_route53_record" "cognito" {
+#   zone_id = data.aws_route53_zone.apse2_domain.zone_id
+#   name    = "${var.subdomain_name}.${var.domain_name}"
+#   type    = "A"
 
-  alias {
-    name                   = aws_cognito_user_pool_domain.domain.cloudfront_distribution
-    zone_id                = aws_cognito_user_pool_domain.domain.cloudfront_distribution_zone_id
-    evaluate_target_health = false
-  }
-}
+#   alias {
+#     name                   = aws_cognito_user_pool.location_user_pool.cloudfront_distribution
+#     zone_id                = aws_cognito_user_pool.location_user_pool.cloudfront_distribution_zone_id
+#     evaluate_target_health = false
+#   }
+# }
 
 # ACM Certificate Validation Record
 resource "aws_route53_record" "subdomain" {
