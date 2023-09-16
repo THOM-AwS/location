@@ -38,7 +38,18 @@ resource "aws_s3_bucket_ownership_controls" "acl" {
 }
 
 resource "aws_s3_bucket_acl" "acl" {
-  depends_on = [aws_s3_bucket_ownership_controls.acl]
-  bucket     = aws_s3_bucket.web_content.id
-  acl        = "public-read"
+  depends_on = [
+    aws_s3_bucket_ownership_controls.acl,
+    aws_s3_bucket_public_access_block.access
+  ]
+  bucket = aws_s3_bucket.web_content.id
+  acl    = "public-read"
+}
+
+resource "aws_s3_bucket_public_access_block" "access" {
+  bucket                  = aws_s3_bucket.web_content.id
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
 }
