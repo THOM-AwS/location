@@ -16,11 +16,12 @@ resource "aws_route53_record" "subdomain" {
   type    = "A"
 
   alias {
-    name                   = aws_cognito_user_pool_domain.location_user_pool.cloudfront_distribution
-    zone_id                = aws_cognito_user_pool_domain.location_user_pool.cloudfront_distribution_zone_id
+    name                   = aws_cognito_user_pool_domain.domain.cloudfront_distribution
+    zone_id                = aws_cognito_user_pool_domain.domain.cloudfront_distribution_zone_id
     evaluate_target_health = false
   }
 }
+
 
 # DNS record for ACM certificate validation
 resource "aws_route53_record" "cert_validation" {
