@@ -22,10 +22,12 @@ jobs:
     - name: Check out code
       uses: actions/checkout@master
     - name: Install dependencies
-      run: 
+      run: |
+        cd app/location
         npm install
     - name: Build React app
-      run: 
+      run: |
+        cd app/location
         npm run build
     - name: artifacts
       uses: actions/upload-artifact@v2
