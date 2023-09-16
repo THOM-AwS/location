@@ -24,7 +24,7 @@ resource "aws_s3_bucket_policy" "web_content_policy" {
           "AWS" : "arn:aws:iam::941133421128:user/actions"
         },
         "Action" : "s3:PutObject",
-        "Resource" : "arn:aws:s3:::location.apse2.com.au/*"
+        "Resource" : "arn:aws:s3:::${aws_s3_bucket.web_content.bucket}/*"
       },
       {
         Effect = "Allow",
@@ -43,15 +43,6 @@ resource "aws_s3_bucket_ownership_controls" "acl" {
   rule {
     object_ownership = "BucketOwnerPreferred"
   }
-}
-
-resource "aws_s3_bucket_acl" "acl" {
-  depends_on = [
-    aws_s3_bucket_ownership_controls.acl,
-    aws_s3_bucket_public_access_block.access
-  ]
-  bucket = aws_s3_bucket.web_content.id
-  acl    = "public-read"
 }
 
 resource "aws_s3_bucket_public_access_block" "access" {

@@ -14,6 +14,8 @@ jobs:
       uses: actions/checkout@master
     - name: Lint Terraform
       uses: actionshub/terraform-lint@main
+    - name: ESLint
+      uses: Krizzu/eslint-check-action@v1.1.0
       
   plan:
     runs-on: ubuntu-latest
