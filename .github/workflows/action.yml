@@ -14,16 +14,15 @@ jobs:
       uses: actions/checkout@master
     - name: Lint Terraform
       uses: actionshub/terraform-lint@main
-    - name: ls
-      run: ls
 
   build:
     runs-on: ubuntu-latest
     needs: lint
     steps:
+    - name: Check out code
+      uses: actions/checkout@master
     - name: Install dependencies
-      run: |
-        ls
+      run: 
         npm install
     - name: Build React app
       run: 
