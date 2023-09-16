@@ -35,5 +35,5 @@ resource "aws_acm_certificate_validation" "domain" {
 
 resource "aws_acm_certificate_validation" "wildcard" {
   certificate_arn         = aws_acm_certificate.wildcard.arn
-  validation_record_fqdns = [for r in aws_route53_record.domain : r.fqdn]
+  validation_record_fqdns = [for r in aws_route53_record.wildcard : r.fqdn]
 }
