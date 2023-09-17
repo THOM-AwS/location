@@ -2,14 +2,17 @@
 resource "aws_cognito_user_pool" "location_user_pool" {
   name = "location_apse2_user_pool"
   // Verification and Aliases
-  auto_verified_attributes = ["email"]
-  alias_attributes         = ["email"]
+  auto_verified_attributes = ["email", "phone_number"]
+  alias_attributes         = ["email", "phone_number"]
 
   // SMS and MFA
   mfa_configuration          = "OFF"
   sms_authentication_message = "Your authentication code is {####}"
   sms_verification_message   = "Your verification code is {####}"
-
+  sms_configuration {
+    external_id    = aws_iam_role.cognito_sms_role.name
+    sns_caller_arn = aws_iam_role.cognito_sms_role.arn
+  }
   // Password Policy
   password_policy {
     minimum_length                   = 8
@@ -21,11 +24,13 @@ resource "aws_cognito_user_pool" "location_user_pool" {
   }
 
   // Email Configuration
-  # email_configuration {
-  #   reply_to_email_address = aws_ses_email_identity.noreply.email
-  #   source_arn             = aws_ses_email_identity.noreply.arn
-  #   email_sending_account  = "DEVELOPER"
-  # }
+  email_configuration {
+    reply_to_email_address = "noreply@apse2.com.au"
+    from_email_address     = "noreply@apse2.com.au"
+    configuration_set      = "default"
+    source_arn             = "arn:aws:ses:us-east-1:941133421128:identity/apse2.com.au"
+    email_sending_account  = "DEVELOPER"
+  }
 }
 
 // === Cognito User Pool Client Configuration ===

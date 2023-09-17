@@ -38,3 +38,38 @@ resource "aws_iam_policy" "cognito_ses_send_email" {
     ]
   })
 }
+
+resource "aws_iam_role" "cognito_sms_role" {
+  name = "Cognito_SMS_Role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Principal = {
+          Service = "cognito-idp.amazonaws.com"
+        },
+        Effect = "Allow",
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy" "cognito_sms_permission" {
+  name = "CognitoSMSSendPermission"
+  role = aws_iam_role.cognito_sms_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "sns:Publish"
+        ],
+        Effect   = "Allow",
+        Resource = "*"
+      }
+    ]
+  })
+}
