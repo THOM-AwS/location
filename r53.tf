@@ -26,9 +26,45 @@ resource "aws_route53_record" "cloudfront" {
 
 // Cert validation for cognito
 resource "aws_route53_record" "validate_wildcard" {
-  name    = aws_acm_certificate.wildcard.domain_validation_options.0.resource_record_name
-  type    = aws_acm_certificate.wildcard.domain_validation_options.0.resource_record_type
+  name    = tolist(aws_acm_certificate.wildcard.domain_validation_options)[0].resource_record_name
+  type    = tolist(aws_acm_certificate.wildcard.domain_validation_options)[0].resource_record_type
   zone_id = data.aws_route53_zone.apse2_domain.zone_id
-  records = [aws_acm_certificate.wildcard.domain_validation_options.0.resource_record_value]
+  records = [tolist(aws_acm_certificate.wildcard.domain_validation_options)[0].resource_record_value]
   ttl     = 60
+}
+
+resource "aws_route53_record" "cognito_cname" {
+  zone_id = data.aws_route53_zone.apse2_domain.zone_id
+  name    = "auth.${var.subdomain_name}.${var.domain_name}"
+  type    = "CNAME"
+  records = ["deom45avxzob2.cloudfront.net"] # This is the CloudFront URL given by Cognito.
+  ttl     = 300
+}
+
+
+// needed for cognito domain
+resource "aws_acm_certificate" "location_subdomain" {
+  domain_name       = "*.${var.subdomain_name}.${var.domain_name}"
+  validation_method = "DNS"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+// needed for cognito domain
+resource "aws_route53_record" "validate_location_subdomain" {
+  name    = tolist(aws_acm_certificate.location_subdomain.domain_validation_options)[0].resource_record_name
+  type    = tolist(aws_acm_certificate.location_subdomain.domain_validation_options)[0].resource_record_type
+  zone_id = data.aws_route53_zone.apse2_domain.zone_id
+  records = [tolist(aws_acm_certificate.location_subdomain.domain_validation_options)[0].resource_record_value]
+  ttl     = 60
+}
+
+resource "aws_route53_record" "root_domain" { // temp work around for root domain a record.
+  zone_id = data.aws_route53_zone.apse2_domain.zone_id
+  name    = var.domain_name
+  type    = "A"
+  ttl     = 300
+  records = ["3.104.111.19"]
 }
