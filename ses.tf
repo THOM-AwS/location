@@ -7,6 +7,3 @@ resource "aws_ses_domain_identity_verification" "verification" {
   depends_on = [aws_route53_record.apse2_domain_verification]
 }
 
-# resource "aws_ses_email_identity" "noreply" {
-#   email = "noreply@apse2.com.au"
-# }

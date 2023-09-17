@@ -33,14 +33,16 @@ resource "aws_route53_record" "validate_wildcard" {
   ttl     = 60
 }
 
-resource "aws_route53_record" "cognito_cname" {
+resource "aws_route53_record" "cognito_a_record" {
+  name    = aws_cognito_user_pool_domain.cognito_domain.domain
+  type    = "A"
   zone_id = data.aws_route53_zone.apse2_domain.zone_id
-  name    = "auth.${var.subdomain_name}.${var.domain_name}"
-  type    = "CNAME"
-  records = ["deom45avxzob2.cloudfront.net"] # This is the CloudFront URL given by Cognito.
-  ttl     = 300
+  alias {
+    evaluate_target_health = false
+    name                   = aws_cognito_user_pool_domain.cognito_domain.cloudfront_distribution
+    zone_id                = aws_cognito_user_pool_domain.cognito_domain.cloudfront_distribution_zone_id
+  }
 }
-
 
 // needed for cognito domain
 resource "aws_acm_certificate" "location_subdomain" {
