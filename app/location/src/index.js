@@ -11,8 +11,8 @@ import { Amplify } from "aws-amplify";
 Amplify.configure({
   Auth: {
     region: "us-east-1",
-    userPoolId: "us-east-1_JVCsxSGbj",
-    userPoolWebClientId: "4jbt18g357p3osj6vjkk2s0v6d",
+    userPoolId: "us-east-1_jL9LmgsrV",
+    userPoolWebClientId: "68tb48da00rul3kn3q04v6aqh1",
   },
 });
 
