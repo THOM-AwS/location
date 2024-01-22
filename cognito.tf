@@ -52,8 +52,22 @@
 #   // Identity Providers
 #   supported_identity_providers = ["COGNITO"]
 
+<<<<<<< HEAD
 #   // Secrets
 #   generate_secret = false
 
 #   # Additional client configurations...
 # }
+=======
+  // Secrets
+  generate_secret = false
+}
+
+resource "aws_cognito_user_pool_domain" "cognito_domain" {
+  domain          = "auth.${var.subdomain_name}.${var.domain_name}"
+  user_pool_id    = aws_cognito_user_pool.location_user_pool.id
+  certificate_arn = aws_acm_certificate.location_subdomain.arn
+}
+
+
+>>>>>>> 3059d00254e59bc8415dd91d093a362a0530b03c

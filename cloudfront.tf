@@ -51,6 +51,13 @@
 #   price_class = "PriceClass_100"
 # }
 
+<<<<<<< HEAD
 # resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 #   comment = "Origin access identity for ${var.subdomain_name}.${var.domain_name} content"
 # }
+=======
+resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
+  comment = "Origin access identity for ${var.subdomain_name}.${var.domain_name} content"
+}
+
+>>>>>>> 3059d00254e59bc8415dd91d093a362a0530b03c
